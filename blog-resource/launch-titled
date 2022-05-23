@@ -1,0 +1,19 @@
+#!/bin/bash
+if [ "$1" == "--help" ] || [ "$1" == "-h" ] || [ -z "$1" ]; then  
+  echo "USAGE: titled command [title]"
+  echo ""
+  echo "gnome-terminal began to have problems with the --title argument. This utility puts either title or current path."
+  exit
+fi
+
+
+# Set the window's title
+if [ -z "$2" ]; then
+ title="${1}"
+else
+ title="${2}"
+fi
+
+echo $title
+echo -ne "\033]0;$title\007" # reset title
+$1

@@ -1,0 +1,71 @@
+body {
+  width: 600px;
+  margin: 50px auto;
+}
+#lang {
+  position: fixed;
+  top: 3px;
+  right: 10px;
+}
+footer {
+  margin-top: 150px;
+}
+footer #logo-cznic {
+  text-align: center;
+  display: block;
+}
+#template-exercise {
+  display: none;
+}
+#score {
+  position: fixed;
+  left: 120px;
+  top: 130px;
+  font-size: 200%;
+  font-family: "Courier New", monospace;
+  transform: rotate(10deg);
+  padding: 10px 20px;
+}
+#score.highlight {
+  background: green;
+  color: white;
+  border-radius: 50px;
+}
+.exercise {
+  margin-bottom: 50px;
+}
+.exercise.perfect {
+  opacity: 0.3;
+}
+.exercise .assignment .highlight {
+  background-color: blue;
+  color: white;
+  border: 1px solid blue;
+}
+.exercise .assignment {
+  font-family: "Courier New", monospace;
+}
+.exercise .sample {
+  resize: none;
+  font-family: "Courier New", monospace;
+}
+.exercise .show {
+  display: none;
+}
+.exercise .representative {
+  display: none;
+}
+.exercise .representative kbd {
+  color: lime;
+}
+.exercise .score {
+  position: absolute;
+  margin-left: 610px;
+  border: 1px solid gray;
+  border-radius: 50px;
+  padding: 10px;
+  transform: rotate(10deg);
+  opacity: 0.7;
+  z-index: -2;
+}
+/*# sourceMappingURL=style.css.map */

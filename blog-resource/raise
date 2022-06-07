@@ -1,0 +1,20 @@
+#!/bin/sh
+#
+# Program remembers current window and popup it consequently.
+#
+
+OPTIONS=$(getopt -o sgf:h -l set,get,file:,help -- "$@")
+
+if [ $? -ne 0 ]; then
+  echo "getopt error"
+  exit 1
+fi
+
+FILE=""
+eval set -- $OPTIONS
+  case "$1" in    
+    -s|--set) xdotool getwindowfocus > raise"$3".tmp ;;    
+    -g|--get) xdotool windowactivate `cat raise"$3".tmp` ;;
+    -h|--help) echo "-s, -set Saves current window. -g, -get Restores previously stored window. Example: Saves: raise -s f1, Loads: raise -g f1" ;;
+  esac
+  

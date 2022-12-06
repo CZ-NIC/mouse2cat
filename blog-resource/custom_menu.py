@@ -194,7 +194,7 @@ class CustomMenu:
 
     def _create_config_file(self):
         if input(f"Create config file at {INI_PATH}? [Y/n]").lower() in ("y", ""):
-            s = v"""[MENU]
+            s = f"""[MENU]
 hello world=notify-send 'hello world'
             
 [preferences]

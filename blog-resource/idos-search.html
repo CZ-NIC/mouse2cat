@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script>
+        // Version working as of 2022.
+    
+        // Receive parameters
+        const parameters = new URL(location).searchParams
+        const [from, to] = parameters.get("from_to") ? parameters.get("from_to").split(",") : [parameters.get("from"), parameters.get("to")]
+
+        // Redirect to IDOS if possible
+        if (from || to) {
+            Promise.all([suggest_name(from), suggest_name(to)]).then((values) => {
+                console.log("Redirecting to", values)
+                const [from, to] = values
+                location = `https://idos.cz/pid/spojeni/vysledky/?f=${from}&t=${to}`
+            })
+        }
+
+        /**
+         * Convert a shortcut text to a full station name as suggested by IDOS.
+         */
+        function suggest_name(shortcut) {
+            const query = encodeURIComponent(shortcut)
+            return $.ajax({
+                url: `https://idos.cz/pid/Ajax/SearchTimetableObjects/?count=18&prefixText=${query}&searchByPosition=false&onlyStation=false&line=&format=json&bindTtIndex=&date=`,
+                dataType: "jsonp"
+            }).then(data => data[0] && data[0]["selectedText"] || "")
+        }
+    </script>
+</head>
+
+<body>
+    Following form will evaluate text shortcuts to station names and redirects to IDOS.cz:
+    <form action="">
+        <input name="from" placeholder="from"/>
+        <input name="to" placeholder="to"/>
+        <input name="from_to" placeholder="from_to"/>
+        <input type="submit" />
+    </form>
+</body>
+
+</html>
